@@ -10,26 +10,18 @@
 - Axios
 - qrcode-vue
 
-## 如何开始
+## 快速开始
 
-> **配置`/src/config/server.ts`**
+1. 配置`/src/config/server.ts`
+2. 安装依赖`pnpm i`
+3. 让后端小伙伴设置 `frontend` 中的 `url` 为本机地址
+4. `pnpm run dev`点击url后打开浏览器后复制url到微信打开
+5. Coding
 
-**本地运行测试**
+## 打包部署
 
-```bash
-yarn dev
-```
+> `pnpm run build` 后将在根目录生成的dist文件压缩成压缩包发给后端小伙伴 
 
-**编译 realease 版本**
-
-```bash
-yarn build
-```
-
-
-## 注意事项
-
-本项目依赖于微信中的浏览器,并且不支持热重载,代码修改效果只能上传至服务器部署后在微信浏览器中查看
 
 ## 更多资料
 
