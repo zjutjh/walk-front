@@ -12,7 +12,7 @@
 
 ## 如何开始
 
-> **配置`/walk-view/src/config/Server.ts`**
+> **配置`/src/config/server.ts`**
 
 **本地运行测试**
 
