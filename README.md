@@ -40,6 +40,6 @@ yarn build
 
 精弘毅行报名系统能走到今天，离不开这些开发者对前端的贡献❤️
 
-<a href="https://github.com/zjutjh/walk-view/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=zjutjh/walk-view"/>
+<a href="https://github.com/zjutjh/walk-front/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zjutjh/walk-front"/>
 </a>
