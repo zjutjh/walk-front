@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { NCard, NButton, useMessage } from 'naive-ui'
 import { useRouter } from 'vue-router'
-import Server from '../../config/Server'
+import Server from '../../config/server'
 
 const messagePrompt = useMessage()
 const router = useRouter()

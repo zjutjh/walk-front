@@ -18,7 +18,9 @@
 4. `pnpm run dev`点击url后打开浏览器后复制url到微信打开
 5. Coding
 
+
 ## 打包部署
+
 
 > `pnpm run build` 后将在根目录生成的dist文件压缩成压缩包发给后端小伙伴 
 

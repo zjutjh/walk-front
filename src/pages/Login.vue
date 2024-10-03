@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NSpace, NSpin } from 'naive-ui'
 import { useRouter } from 'vue-router'
-import Server from '../config/Server'
+import Server from '../config/server'
 import { onMounted } from '@vue/runtime-core'
 import { getQueryVariable } from '../utility'
 

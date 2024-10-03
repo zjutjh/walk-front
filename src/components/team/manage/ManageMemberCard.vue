@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { NSpace, NButton, NCard, useMessage } from 'naive-ui'
-import ServerConfig from '../../../config/Server'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
-import Server from '../../../config/Server'
+import Server from '../../../config/server'
 
 const message = useMessage()
 const router = useRouter()
@@ -15,7 +14,7 @@ defineProps({
 })
 
 function removeMember(openID: string | undefined) {
-  const removeMemberUrl = ServerConfig.urlPrefix + ServerConfig.apiMap['team']['remove']
+  const removeMemberUrl = Server.urlPrefix + Server.apiMap['team']['remove']
   axios
     .get(removeMemberUrl, {
       params: {
