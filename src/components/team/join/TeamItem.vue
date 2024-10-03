@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { NThing, NTag, NCard, NButton, useMessage } from 'naive-ui'
 import { useRouter } from 'vue-router'
-import Server from '../../../config/Server'
+import Server from '../../../config/server'
 
 const router = useRouter()
 const message = useMessage()

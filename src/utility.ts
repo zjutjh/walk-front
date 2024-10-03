@@ -1,4 +1,4 @@
-import Server from './config/Server'
+import Server from './config/server'
 import axios from 'axios'
 
 export function getQueryVariable(variable: string): string {

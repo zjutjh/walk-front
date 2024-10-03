@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 import { NButton, useMessage, useDialog } from 'naive-ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import ServerConfig from '../../../config/Server'
+import ServerConfig from '../../../config/server'
 import { getTeamData, getUserData } from '../../../utility'
 
 const router = useRouter()

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { NPageHeader, NCard, NAlert, NSpin, useMessage , NButton } from 'naive-ui'
 import { onMounted, ref , nextTick} from 'vue'
 import { useRouter } from 'vue-router'
-import server from '../config/Server'
+import server from '../config/server'
 import html2canvas from 'html2canvas'
 import { type } from 'os'
 import b1 from "../assets/b1.png"
