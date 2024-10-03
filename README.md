@@ -15,7 +15,7 @@
 1. 配置`/src/config/server.ts`
 2. 安装依赖`pnpm i`
 3. 让后端小伙伴设置 `frontend` 中的 `url` 为本机地址
-4. `pnpm run dev`点击url后打开浏览器后复制url到微信打开
+4. `pnpm run dev` 电脑微信打开 `localhost:PORT`, 复制url到电脑微信打开
 5. Coding
 
 
