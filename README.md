@@ -1,54 +1,39 @@
-# walk-view 精弘毅行 2023 报名系统 · 前端
+# 精弘毅行报名系统 · 前端
 
-精弘网络在 2023 年重启第 14 届毅行，在 [肖哥](https://github.com/lixiao189) 21 年重构的基础上，由  [Tiancy](https://github.com/Tianci-King) 和 [Patrickill](https://github.com/Patrickill) 基于 扫码和海报 这两个业务模块进行了新一次的重构，并配套搭建了管理员小程序端用于点位签到打卡
-
----
-
-精弘网络在 2021 年决定尝试优化一下精弘毅行报名系统的性能，对原来的项目进行了重构
+精弘毅行报名系统是使用Vue3 + TS + 微信相关接口开发的团队报名系统,并配套搭建了管理员小程序端用于点位签到打卡
 
 
-
-## 相关技术
-
-**第三方库：**
+## 技术栈
 
 - Vue
-
-- Vue-router
-
 - Naive UI
-
-- axios
-
+- Axios
 - qrcode-vue
 
-**前端构建工具：**
+## 快速开始
 
-- yarn 包管理器
-- Node.JS 运行环境
-- Vite 构建工具
+1. 配置`/src/config/server.ts`
+2. 安装依赖`pnpm i`
+3. 让后端小伙伴设置 `frontend` 中的 `url` 为本机地址
+4. `pnpm run dev` 电脑微信打开 `localhost:PORT`, 复制url到电脑微信打开
+5. Coding
 
 
+## 打包部署
 
-## 如何开始
 
-> **配置`/walk-view/src/config/server.ts`**
+> `pnpm run build` 后将在根目录生成的dist文件压缩成压缩包发给后端小伙伴 
 
-**本地运行测试**
 
-```bash
-yarn dev
-```
+## 更多资料
 
-**编译 realease 版本**
+- Native UI 官方文档: [https://www.naiveui.com/zh-CN/os-theme/](https://www.naiveui.com/zh-CN/os-theme/)
+- 毅行管理员小程序: [https://github.com/zjutjh/walk-view-admin-taro](https://github.com/zjutjh/walk-view-admin-taro)
 
-```bash
-yarn build
-```
+## 开发者
 
-**预览编译结果**
+精弘毅行报名系统能走到今天，离不开这些开发者对前端的贡献❤️
 
-```bash
-yarn serve
-```
-
+<a href="https://github.com/zjutjh/walk-front/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zjutjh/walk-front"/>
+</a>
