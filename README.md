@@ -18,6 +18,7 @@
 4. `pnpm run dev` 电脑微信打开 `localhost:PORT`, 复制url到电脑微信打开
 5. Coding
 
+> 如果硬要普通浏览器打开，需要复制账号的 token，写到 localStorage 的 jwt 字段下
 
 ## 打包部署
 
