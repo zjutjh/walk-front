@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Server from '../../../config/Server'
+import Server from '../../../config/server'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getUserData } from '../../../utility'

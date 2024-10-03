@@ -8,7 +8,7 @@ import {
 } from 'naive-ui';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import ServerConfig from '../../../config/Server';
+import ServerConfig from '../../../config/server';
 
 const router = useRouter();
 const teamID = ref('');

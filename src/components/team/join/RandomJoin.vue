@@ -3,7 +3,7 @@ import axios from 'axios'
 import { NSelect, NButton, NSpace, NGrid, NGridItem, useMessage, NModal } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import ServerConfig from '../../../config/Server'
+import ServerConfig from '../../../config/server'
 import RandomList from './RandomList.vue'
 
 const router = useRouter()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import axios, { AxiosResponse } from 'axios'
-import Config from '../../config/Server'
+import Config from '../../config/server'
 import {
   NCard,
   NForm,

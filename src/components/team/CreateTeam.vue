@@ -17,7 +17,7 @@ import {
 import { SelectMixedOption } from 'naive-ui/lib/select/src/interface'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Config from '../../config/Server'
+import Config from '../../config/server'
 
 let routeOptions = ref<SelectMixedOption[]>()
 let formRef = ref<FormInst | null>(null)
