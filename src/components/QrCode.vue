@@ -23,6 +23,7 @@ const flushCode = () => {
     const time = new Date().getTime()
 
     qrcode.value = JSON.stringify({
+      status: 3,
       jwt: "Bearer " + jwt,
       time: time
     })
@@ -32,12 +33,11 @@ const flushCode = () => {
     const time = new Date().getTime()
 
     qrcode.value = JSON.stringify({
+      status: 1,
       team_id: teamData.value['id'],
       time: time
     })
   }
-  //十五秒自动刷新
-  setTimeout(flushCode, 15000);
 }
 
 

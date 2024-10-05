@@ -80,7 +80,7 @@ function submitTeam() {
     .then(function (response: AxiosResponse) {
       const respData: any = response.data
       if (respData['code'] == 200) {
-        message.success('提交队伍成功, 在团队信息页面最下方的按钮可以查看海报', {
+        message.success('提交队伍成功', {
           onAfterLeave: () => {
             setTimeout(() => router.push('/loading'), 800)
           }
