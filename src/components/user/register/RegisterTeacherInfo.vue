@@ -21,6 +21,7 @@ const formValue = ref({
   name: '',
   gender: -1,
   home: '身份证号',
+  stu_id: '',
   id: '',
   contact: {
     tel: '',
@@ -163,6 +164,12 @@ function submit() {
       <n-input
         :placeholder="'请输入' + formValue.home"
         v-model:value="formValue.id"
+      />
+    </n-form-item>
+    <n-form-item label="工号" path="stu_id">
+      <n-input
+        placeholder="请输入工号"
+        v-model:value="formValue.stu_id"
       />
     </n-form-item>
     <n-form-item label="电话号码" path="contact.tel">
