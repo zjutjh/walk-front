@@ -37,6 +37,7 @@ function jumpToManageMember() {
       :walk-status="teamData['leader']['walk_status']"
       :is-leader="true"
       :campus="teamData['leader']['campus']"
+      :type="teamData['leader']['type']"
     ></member-card>
 
     <!-- 队员信息 -->
@@ -50,6 +51,7 @@ function jumpToManageMember() {
       :wechat="member['contact']['wechat']"
       :walk-status="member['walk_status']"
       :is-leader="false"
+      :type="member['type']"
     ></member-card>
   </n-card>
 </template>

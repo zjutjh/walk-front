@@ -9,7 +9,9 @@ const props = defineProps({
   walkStatus: Number,
   campus: Number,
   wechat: String,
+  type: Number
 });
+
 
 const qqStr = computed(() => {
   const qqStr = props.qq;
@@ -49,13 +51,20 @@ const campusName = computed(() => {
     <template #header-extra>
       <n-space>
         <n-tag
-          v-if="campus == 5"
+          v-if="type == 1"
+          style="margin-right: 10px"
+          size="small"
+          type="success"
+        >学生</n-tag
+        >
+        <n-tag
+          v-if="type == 2"
           style="margin-right: 10px"
           size="small"
           type="success"
           >教职工</n-tag
         >
-        <n-tag v-else style="margin-right: 10px" size="small" type="warning">{{
+        <n-tag v-if=' campus !== 0 ' style="margin-right: 10px" size="small" type="warning">{{
           campusName
         }}</n-tag>
         <n-tag
