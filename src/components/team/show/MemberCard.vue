@@ -64,6 +64,13 @@ const campusName = computed(() => {
           type="success"
           >教职工</n-tag
         >
+        <n-tag
+          v-if="type == 3"
+          style="margin-right: 10px"
+          size="small"
+          type="success"
+        >校友</n-tag
+        >
         <n-tag v-if=' campus !== 0 ' style="margin-right: 10px" size="small" type="warning">{{
           campusName
         }}</n-tag>

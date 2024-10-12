@@ -12,6 +12,7 @@ import RegisterStudentInfo from '/src/components/user/register/RegisterStudentIn
 import RegisterTeacherInfo from '/src/components/user/register/RegisterTeacherInfo.vue';
 
 import { ref } from 'vue';
+import RegisterAlumniInfo from '../components/user/register/RegisterAlumniInfo.vue'
 
 const showModal = ref(false);
 const timeout = ref(10);
@@ -143,6 +144,10 @@ function onPositiveClick() {
         <n-tab-pane name="teacher" tab="教职工报名">
           <register-teacher-info></register-teacher-info>
         </n-tab-pane>
+        <n-tab-pane name="alumni" tab="校友登录" >
+          <register-alumni-info></register-alumni-info>
+        </n-tab-pane>
+
       </n-tabs>
     </n-card>
   </n-message-provider>
