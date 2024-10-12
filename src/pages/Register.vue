@@ -12,6 +12,7 @@ import RegisterStudentInfo from '/src/components/user/register/RegisterStudentIn
 import RegisterTeacherInfo from '/src/components/user/register/RegisterTeacherInfo.vue';
 
 import { ref } from 'vue';
+import RegisterAlumniInfo from '../components/user/register/RegisterAlumniInfo.vue'
 
 const showModal = ref(false);
 const timeout = ref(10);
@@ -59,6 +60,7 @@ function onPositiveClick() {
           <div>
             毅行活动是一项中高强度长距离的徒步活动，对参赛者身体状况有较高的要求，参赛者应身体健康。
           </div>
+          <div>有下述情况之一的不适宜参加毅行活动：</div>
           <div style='color: red'>1.先天性心脏病和风湿性心脏病患者；</div>
           <div style='color: red'>2.高血压和心脑血管疾病患者；</div>
           <div style='color: red'>3.心肌炎和其他心脏病患者；</div>
@@ -142,6 +144,10 @@ function onPositiveClick() {
         <n-tab-pane name="teacher" tab="教职工报名">
           <register-teacher-info></register-teacher-info>
         </n-tab-pane>
+        <n-tab-pane name="alumni" tab="校友登录" >
+          <register-alumni-info></register-alumni-info>
+        </n-tab-pane>
+
       </n-tabs>
     </n-card>
   </n-message-provider>

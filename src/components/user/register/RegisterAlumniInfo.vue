@@ -19,31 +19,15 @@ const message = useMessage();
 const router = useRouter();
 const formValue = ref({
   name: '',
-  gender: -1,
   home: '身份证号',
-  stu_id: '',
   id: '',
-  contact: {
-    tel: '',
-    wechat: '',
-    qq: '',
-  },
+  tel: '',
 });
 const rules = ref({
   name: {
     required: true,
     message: '请输入姓名',
     trigger: 'blur',
-  },
-  gender: {
-    required: true,
-    message: '请选择性别',
-    trigger: ['input', 'blur'],
-  },
-  home: {
-    required: true,
-    message: '请选择故乡',
-    trigger: ['input', 'blur'],
   },
   id: {
     required: true,
@@ -79,7 +63,6 @@ const rules = ref({
     },
     trigger: ['input', 'blur'],
   },
-  contact: {
     tel: {
       required: true,
       validator(rule: any, value: any) {
@@ -92,28 +75,16 @@ const rules = ref({
       },
       trigger: ['input', 'blur'],
     },
-    wechat: {
-      required: false,
-      message: '请输入微信号',
-      trigger: ['input', 'blur'],
-    },
-    qq: {
-      required: false,
-      message: '请输入QQ号',
-      trigger: ['input', 'blur'],
-    },
-  },
 });
 
 function submit() {
   formRef.value.validate((errors: any) => {
     if (!errors) {
       // 提交数据
-      formValue.value.gender = Number(formValue.value.gender);
-      const submitTeacherUrl =
-        Server.urlPrefix + Server.apiMap['register']['teacher'];
+      const submitAlumniUrl =
+        Server.urlPrefix + Server.apiMap['register']['alumni'];
       axios
-        .post(submitTeacherUrl, formValue.value, {
+        .post(submitAlumniUrl, formValue.value, {
           timeout: 3000,
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('jwt'),
@@ -122,7 +93,7 @@ function submit() {
         .then(function (response: AxiosResponse) {
           const responseData: any = response.data;
           if (responseData['code'] == 200) {
-            message.success('注册成功');
+            message.success('登录成功');
             setTimeout(() => router.push('/loading'), 1000); // 跳转到加载信息页面
           } else {
             message.error(responseData['msg']); // 报错信息
@@ -146,46 +117,17 @@ function submit() {
       <n-input placeholder="请输入姓名" v-model:value="formValue.name" />
     </n-form-item>
 
-    <n-form-item label="性别" path="gender">
-      <n-radio-group v-model:value="formValue.gender">
-        <n-radio-button value="1">男</n-radio-button>
-        <n-radio-button value="2">女</n-radio-button>
-      </n-radio-group>
-    </n-form-item>
-    <n-form-item label="故乡" path="home">
-      <n-radio-group v-model:value="formValue.home">
-        <n-radio-button value="身份证号">内陆</n-radio-button>
-        <n-radio-button value="港澳身份证">港澳</n-radio-button>
-        <n-radio-button value="台湾身份证">台湾</n-radio-button>
-        <n-radio-button value="护照">国际</n-radio-button>
-      </n-radio-group>
-    </n-form-item>
     <n-form-item :label="formValue.home" path="id">
       <n-input
         :placeholder="'请输入' + formValue.home"
         v-model:value="formValue.id"
       />
     </n-form-item>
-    <n-form-item label="工号" path="stu_id">
-      <n-input
-        placeholder="请输入工号"
-        v-model:value="formValue.stu_id"
-      />
-    </n-form-item>
     <n-form-item label="电话号码" path="contact.tel">
       <n-input
         placeholder="请输入电话号码"
-        v-model:value="formValue.contact.tel"
+        v-model:value="formValue.tel"
       />
-    </n-form-item>
-    <n-form-item label="微信号(可选)" path="contact.wechat">
-      <n-input
-        placeholder="请输入微信号"
-        v-model:value="formValue.contact.wechat"
-      />
-    </n-form-item>
-    <n-form-item label="QQ号(可选)" path="contact.qq">
-      <n-input placeholder="请输入QQ号" v-model:value="formValue.contact.qq" />
     </n-form-item>
     <n-form-item>
       <n-button
@@ -193,7 +135,7 @@ function submit() {
         attr-type="button"
         style="margin: auto; width: 100%"
         type="primary"
-        >提交</n-button
+      >提交</n-button
       >
     </n-form-item>
   </n-form>
