@@ -3,6 +3,7 @@ import QrcodeVue from 'qrcode.vue'
 import { NCard } from 'naive-ui'
 import { ref } from 'vue'
 import { onMounted } from '@vue/runtime-core'
+import { getUserData } from '../utility'
 
 const props = defineProps(['method'])
 
@@ -19,11 +20,11 @@ onMounted(() => {
 const flushCode = () => {
   if (method === 'user') {
     const jwt = localStorage.getItem('jwt')
-
+    const userData = ref(getUserData())
     const time = new Date().getTime()
-
     qrcode.value = JSON.stringify({
-      status: 3,
+      name: userData.value.name,
+      type: 3,
       jwt: "Bearer " + jwt,
       time: time
     })
@@ -33,7 +34,7 @@ const flushCode = () => {
     const time = new Date().getTime()
 
     qrcode.value = JSON.stringify({
-      status: 1,
+      type: 1,
       team_id: teamData.value['id'],
       time: time
     })
