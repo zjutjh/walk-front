@@ -95,10 +95,10 @@ routeOptions.value = [
     label: '屏峰全程',
     value: 3,
   },
-  {
-    label: '莫干山半程',
-    value: 4,
-  },
+  // {
+  //   label: '莫干山半程',
+  //   value: 4,
+  // },
   {
     label: '莫干山全程',
     value: 5,
