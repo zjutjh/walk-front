@@ -109,38 +109,16 @@ routeOptions.value = [
     label: '屏峰全程',
     value: '3',
   },
-  {
-    label: '莫干山半程',
-    value: '4',
-  },
+  // {
+  //   label: '莫干山半程',
+  //   value: '4',
+  // },
   {
     label: '莫干山全程',
     value: '5',
   },
 ]
 
-routeOptions.value = [
-  {
-    label: '朝晖全程',
-    value: '1',
-  },
-  {
-    label: '屏峰半程',
-    value: '2',
-  },
-  {
-    label: '屏峰全程',
-    value: '3',
-  },
-  {
-    label: '莫干山半程',
-    value: '4',
-  },
-  {
-    label: '莫干山全程',
-    value: '5',
-  },
-]
 
 function createTeam() {
   formRef.value?.validate((errors: any) => {

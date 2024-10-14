@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NCard, NButton } from 'naive-ui'
+import { NCard, NButton, NTag } from 'naive-ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import MemberCard from './MemberCard.vue'
@@ -10,6 +10,7 @@ const router = useRouter()
 // 展示用的数据
 const teamData = ref(getTeamData())
 
+
 // 是否是队长
 const isLeader = computed(() => {
   const userData = getUserData()
@@ -19,14 +20,38 @@ const isLeader = computed(() => {
 function jumpToManageMember() {
   router.push('/info/team/managemember')
 }
+
+
+const isAllTeacher = computed(() => {
+  for(const member in teamData['member']) {
+    if(member['type'] != 2) return false
+  }
+  return true
+})
+
+const teamName = computed(() => {
+  if(teamData.value['leader']['type'] === 3){
+    return "校友队"
+  } else if (teamData.value['leader']['type'] === 1) {
+    return "学生队"
+  } else if (teamData.value['leader']['type'] === 2 && isAllTeacher.value) {
+    return "老师队"
+  } else {
+    return "师生队"
+  }
+})
 </script>
 
 <template>
   <n-card title="🧑‍🎓 &nbsp; 队员信息" embedded :bordered="false" size="small">
     <template #header-extra>
+      <n-tag
+        style="margin-right: 10px"
+        size="small"
+        type="success"
+      >{{ teamName }}</n-tag>
       <n-button v-if="isLeader && !teamData['submitted']" @click="jumpToManageMember" size="small" round
-        >管理团队</n-button
-      >
+        >管理团队</n-button>
     </template>
     <!-- 领队信息 -->
     <member-card
