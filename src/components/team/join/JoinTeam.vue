@@ -6,7 +6,7 @@ import RandomMatch from './RandomJoin.vue'
 </script>
 
 <template>
-  <n-collapse style="margin-top: 15px" default-expanded-names="1" arrow-placement="right" accordion>
+  <n-collapse style="margin-top: 15px"  arrow-placement="right" accordion :default-expanded-names="['1', '2']" >
     <n-collapse-item title="🏊 &nbsp;&nbsp;通过团队密码加入团队" name="1">
       <password-join></password-join>
     </n-collapse-item>

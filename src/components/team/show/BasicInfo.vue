@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NCard, NTable, NButton, useMessage, useDialog } from 'naive-ui'
+import { NCard, NTable, NButton, useMessage, useDialog, NTag } from 'naive-ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getTeamData, getUserData } from '../../../utility'
@@ -54,6 +54,7 @@ const teamPoint = computed(() => {
 function jumpToUpdateTeam() {
   router.push('/info/team/updateteam')
 }
+
 
 </script>
 
