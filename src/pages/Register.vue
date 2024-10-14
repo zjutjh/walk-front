@@ -140,13 +140,12 @@ function onPositiveClick() {
         <n-tab-pane name="student" tab="学生报名">
           <register-student-info></register-student-info>
         </n-tab-pane>
-
         <n-tab-pane name="teacher" tab="教职工报名">
           <register-teacher-info></register-teacher-info>
         </n-tab-pane>
-        <n-tab-pane name="alumni" tab="校友登录" >
-          <register-alumni-info></register-alumni-info>
-        </n-tab-pane>
+<!--        <n-tab-pane name="alumni" tab="校友登录" >-->
+<!--          <register-alumni-info></register-alumni-info>-->
+<!--        </n-tab-pane>-->
 
       </n-tabs>
     </n-card>
