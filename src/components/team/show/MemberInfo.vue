@@ -9,7 +9,7 @@ const router = useRouter()
 
 // 展示用的数据
 const teamData = ref(getTeamData())
-
+console.log(teamData)
 
 // 是否是队长
 const isLeader = computed(() => {
@@ -77,6 +77,7 @@ const teamName = computed(() => {
       :walk-status="member['walk_status']"
       :is-leader="false"
       :type="member['type']"
+      :openid = "member['open_id']"
     ></member-card>
   </n-card>
 </template>

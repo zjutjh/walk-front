@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { computed } from '@vue/reactivity';
-import { NTable, NTag, NSpace, NCard } from 'naive-ui';
+import { NTable, NTag, NSpace, NCard, NButton, useMessage, useDialog } from 'naive-ui'
+import Config from '../../../config/server'
+import axios, { AxiosResponse } from 'axios'
+import { useRouter } from 'vue-router'
+const message = useMessage()
+const router = useRouter()
+const dialog = useDialog()
+const userData = JSON.parse(<string>localStorage.getItem("user_data"))
+console.log(userData["status"])
 const props = defineProps({
   name: String,
   isLeader: Boolean,
@@ -9,10 +17,52 @@ const props = defineProps({
   walkStatus: Number,
   campus: Number,
   wechat: String,
-  type: Number
+  type: Number,
+  openid: String
 });
-
-
+function refresh() {
+  if (localStorage.getItem('canLoadInfo') == null || localStorage.getItem('canLoadInfo') == 'yes') {
+    localStorage.setItem('canLoadInfo', 'no')
+    router.push('/loading')
+    setTimeout(() => {
+      localStorage.setItem('canLoadInfo', 'yes')
+    }, 1000)
+  } else {
+    message.warning('让生产队的驴休息一下吧')
+  }
+}
+const handleClick = () => {
+  dialog.warning({
+    title: '警告',
+    content: '你确定要转移队长？',
+    positiveText: '确定',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      transferCaptain()
+    },
+    onNegativeClick: () => {},
+  })
+}
+const transferCaptain = () => {
+  const transferCaptainUrl = Config.urlPrefix + Config.apiMap['team']['transferCaptain']
+  axios.post(transferCaptainUrl, { openid: props.openid }, {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+    },
+    timeout: 3000,
+  }).then(function (response: AxiosResponse) {
+    const respData: any = response.data
+    if (respData['code'] == 200) {
+      message.success('移交成功')
+      refresh()
+    } else {
+      message.error(respData['msg'])
+    }
+  })
+    .catch(function (error) {
+      message.error('请检查你的网络连接')
+    })
+}
 const qqStr = computed(() => {
   const qqStr = props.qq;
   if (qqStr == '') return '无';
@@ -107,5 +157,11 @@ const campusName = computed(() => {
         </tr>
       </tbody>
     </n-table>
+    <n-button
+      style="width: 100%; margin: 10px auto auto;"
+      type="warning"
+      v-if='!props.isLeader && userData["status"] === 2'
+      @click='handleClick'
+    >移交队长</n-button>
   </n-card>
 </template>
