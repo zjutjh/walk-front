@@ -45,7 +45,7 @@ const handleClick = () => {
 }
 const transferCaptain = () => {
   const transferCaptainUrl = Config.urlPrefix + Config.apiMap['team']['transferCaptain']
-  axios.post(transferCaptainUrl, { openid: props.openid }, {
+  axios.post(transferCaptainUrl, { open_id: props.openid }, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('jwt'),
     },
