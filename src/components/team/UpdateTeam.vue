@@ -186,6 +186,7 @@ function goBack() {
 
         <n-form-item label="路线选择" path="route">
           <n-select
+            disabled
             v-model:value="formValue.route"
             placeholder="请选择路线"
             :options="routeOptions"

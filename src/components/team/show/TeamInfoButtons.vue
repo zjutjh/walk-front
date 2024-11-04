@@ -67,7 +67,7 @@ function submitTeam() {
   disabled.value = true
   setTimeout(() => {
     disabled.value = false
-  }, 3000)
+  }, 1000)
 
   const submitTeamUrl = ServerConfig.urlPrefix + ServerConfig.apiMap['team']['submit']
   axios

@@ -68,7 +68,7 @@ const rules = ref({
       validator(rule: any, value: any) {
         if (!value) {
           return new Error('请输入电话号码');
-        } else if (!/^1(3|4|5|6|7|8|9)\d{9}$/.test(value)) {
+        } else if (!/^1([3456789])\d{9}$/.test(value)) {
           return new Error('手机号格式不正确');
         }
         return true;
@@ -113,6 +113,9 @@ function submit() {
     ref="formRef"
     style="margin: 10px auto 0"
   >
+    <n-form-item style='margin-top: -30px'>
+      <n-text style='color: gray'>以报名时所提交信息为准，可能由于报名时信息填写有误导致无法登录，如有问题联系吴同学，微信号：hrw654789</n-text>
+    </n-form-item>
     <n-form-item label="姓名" path="name">
       <n-input placeholder="请输入姓名" v-model:value="formValue.name" />
     </n-form-item>
@@ -123,7 +126,7 @@ function submit() {
         v-model:value="formValue.id"
       />
     </n-form-item>
-    <n-form-item label="电话号码" path="contact.tel">
+    <n-form-item label="电话号码" path="tel">
       <n-input
         placeholder="请输入电话号码"
         v-model:value="formValue.tel"
