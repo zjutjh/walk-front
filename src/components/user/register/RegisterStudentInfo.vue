@@ -127,6 +127,7 @@ const formValue = ref({
   stu_id: '',
   home: '身份证号',
   id: '',
+  password: '',
   contact: {
     tel: '',
     wechat: '',
@@ -206,6 +207,11 @@ const rules = ref({
       }
       return true;
     },
+    trigger: ['input', 'blur'],
+  },
+  password: {
+    required: true,
+    message: '请输入密码',
     trigger: ['input', 'blur'],
   },
   contact: {
@@ -312,6 +318,11 @@ watch(
     <n-form-item label="学号" path="stu_id">
       <n-input placeholder="请输入学号" v-model:value="formValue.stu_id" />
     </n-form-item>
+
+    <n-form-item label="统一密码" path="password">
+      <n-input type="password" placeholder="请输入统一登陆密码" v-model:value="formValue.password" />
+    </n-form-item>
+
 
     <n-form-item label="故乡" path="home"> 
       <n-radio-group v-model:value="formValue.home">
