@@ -9,6 +9,7 @@ import {
   NRadioButton,
   useMessage,
   NSelect,
+  FormRules,
 } from 'naive-ui';
 import { SelectMixedOption } from 'naive-ui/lib/select/src/interface';
 import Server from '../../../config/server';
@@ -138,9 +139,11 @@ const rules = ref({
     trigger: 'blur',
   },
   gender: {
+    type: "number",
     required: true,
     message: '请选择性别',
     trigger: ['input', 'blur'],
+
   },
   stu_id: {
     required: true,
@@ -160,6 +163,7 @@ const rules = ref({
     trigger: ['input', 'blur'],
   },
   campus: {
+    type: "number",
     required: true,
     message: '请选择校区',
     trigger: ['input', 'blur'],
@@ -264,7 +268,7 @@ function submit() {
 <template>
   <n-form
     :model="formValue"
-    :rules="rules"
+    :rules="rules as FormRules"
     ref="formRef"
     style="margin: 10px auto 0"
   >
@@ -274,8 +278,8 @@ function submit() {
 
     <n-form-item label="性别" path="gender">
       <n-radio-group v-model:value="formValue.gender">
-        <n-radio-button value="1">男</n-radio-button>
-        <n-radio-button value="2">女</n-radio-button>
+        <n-radio-button :value="1">男</n-radio-button>
+        <n-radio-button :value="2">女</n-radio-button>
       </n-radio-group>
     </n-form-item>
 
@@ -289,9 +293,9 @@ function submit() {
 
     <n-form-item label="校区" path="campus">
       <n-radio-group v-model:value="formValue.campus">
-        <n-radio-button value="1">朝晖</n-radio-button>
-        <n-radio-button value="2">屏峰</n-radio-button>
-        <n-radio-button value="3">莫干山</n-radio-button>
+        <n-radio-button :value="1">朝晖</n-radio-button>
+        <n-radio-button :value="2">屏峰</n-radio-button>
+        <n-radio-button :value="3">莫干山</n-radio-button>
       </n-radio-group>
     </n-form-item>
 
