@@ -11,9 +11,10 @@ import {
   NSelect,
   FormRules,
 } from 'naive-ui';
+
 import { SelectMixedOption } from 'naive-ui/lib/select/src/interface';
 import Server from '../../../config/server';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 const formRef = ref();
@@ -263,6 +264,15 @@ function submit() {
     }
   });
 }
+
+const idFormItemRef = ref()
+
+watch(
+  () => formValue.value.home,
+  () => {
+    idFormItemRef.value.validate()
+  }
+);
 </script>
 
 <template>
@@ -303,7 +313,7 @@ function submit() {
       <n-input placeholder="请输入学号" v-model:value="formValue.stu_id" />
     </n-form-item>
 
-    <n-form-item label="故乡" path="home">
+    <n-form-item label="故乡" path="home"> 
       <n-radio-group v-model:value="formValue.home">
         <n-radio-button value="身份证号">内陆</n-radio-button>
         <n-radio-button value="港澳身份证">港澳</n-radio-button>
@@ -312,7 +322,7 @@ function submit() {
       </n-radio-group>
     </n-form-item>
 
-    <n-form-item :label="formValue.home" path="id">
+    <n-form-item :label="formValue.home" path="id"  ref="idFormItemRef">
       <n-input
         :placeholder="'请输入' + formValue.home"
         v-model:value="formValue.id"
