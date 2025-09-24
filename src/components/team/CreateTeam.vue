@@ -97,10 +97,10 @@ function onNegativeClick() {
 }
 
 routeOptions.value = [
-  {
-    label: '朝晖全程',
-    value: '1',
-  },
+  // {
+  //   label: '朝晖全程',
+  //   value: '1',
+  // },
   {
     label: '屏峰半程',
     value: '2',
