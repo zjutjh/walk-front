@@ -9,10 +9,12 @@ import {
   NRadioButton,
   useMessage,
   NSelect,
+  FormRules,
 } from 'naive-ui';
+
 import { SelectMixedOption } from 'naive-ui/lib/select/src/interface';
 import Server from '../../../config/server';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 const formRef = ref();
@@ -125,6 +127,7 @@ const formValue = ref({
   stu_id: '',
   home: '身份证号',
   id: '',
+  password: '',
   contact: {
     tel: '',
     wechat: '',
@@ -138,9 +141,11 @@ const rules = ref({
     trigger: 'blur',
   },
   gender: {
+    type: "number",
     required: true,
     message: '请选择性别',
     trigger: ['input', 'blur'],
+
   },
   stu_id: {
     required: true,
@@ -160,6 +165,7 @@ const rules = ref({
     trigger: ['input', 'blur'],
   },
   campus: {
+    type: "number",
     required: true,
     message: '请选择校区',
     trigger: ['input', 'blur'],
@@ -201,6 +207,11 @@ const rules = ref({
       }
       return true;
     },
+    trigger: ['input', 'blur'],
+  },
+  password: {
+    required: true,
+    message: '请输入密码',
     trigger: ['input', 'blur'],
   },
   contact: {
@@ -259,12 +270,21 @@ function submit() {
     }
   });
 }
+
+const idFormItemRef = ref()
+
+watch(
+  () => formValue.value.home,
+  () => {
+    idFormItemRef.value.validate()
+  }
+);
 </script>
 
 <template>
   <n-form
     :model="formValue"
-    :rules="rules"
+    :rules="rules as FormRules"
     ref="formRef"
     style="margin: 10px auto 0"
   >
@@ -274,8 +294,8 @@ function submit() {
 
     <n-form-item label="性别" path="gender">
       <n-radio-group v-model:value="formValue.gender">
-        <n-radio-button value="1">男</n-radio-button>
-        <n-radio-button value="2">女</n-radio-button>
+        <n-radio-button :value="1">男</n-radio-button>
+        <n-radio-button :value="2">女</n-radio-button>
       </n-radio-group>
     </n-form-item>
 
@@ -289,9 +309,9 @@ function submit() {
 
     <n-form-item label="校区" path="campus">
       <n-radio-group v-model:value="formValue.campus">
-        <n-radio-button value="1">朝晖</n-radio-button>
-        <n-radio-button value="2">屏峰</n-radio-button>
-        <n-radio-button value="3">莫干山</n-radio-button>
+        <n-radio-button :value="1">朝晖</n-radio-button>
+        <n-radio-button :value="2">屏峰</n-radio-button>
+        <n-radio-button :value="3">莫干山</n-radio-button>
       </n-radio-group>
     </n-form-item>
 
@@ -299,7 +319,12 @@ function submit() {
       <n-input placeholder="请输入学号" v-model:value="formValue.stu_id" />
     </n-form-item>
 
-    <n-form-item label="故乡" path="home">
+    <n-form-item label="统一密码" path="password">
+      <n-input type="password" placeholder="请输入统一登陆密码" v-model:value="formValue.password" />
+    </n-form-item>
+
+
+    <n-form-item label="故乡" path="home"> 
       <n-radio-group v-model:value="formValue.home">
         <n-radio-button value="身份证号">内陆</n-radio-button>
         <n-radio-button value="港澳身份证">港澳</n-radio-button>
@@ -308,7 +333,7 @@ function submit() {
       </n-radio-group>
     </n-form-item>
 
-    <n-form-item :label="formValue.home" path="id">
+    <n-form-item :label="formValue.home" path="id"  ref="idFormItemRef">
       <n-input
         :placeholder="'请输入' + formValue.home"
         v-model:value="formValue.id"
