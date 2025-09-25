@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { NCard, NTabs, NTabPane, NButton, useMessage, NAlert, NSpace, NMessageProvider, NModal } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
-import { RouterView, useRouter } from 'vue-router'
-import { defaultTab, getUserData } from '../utility'
+import { RouterView, useRouter, useRoute } from 'vue-router'
+import { defaultTab, getUserData, useRefresh } from '../utility'
 
 const router = useRouter()
-const message = useMessage()
+const route = useRoute()
 const userData = getUserData()
+
+
+
+const refresh = useRefresh()
 
 // 该页面默认显示的 tab
 const showModal = ref(false)
@@ -26,6 +30,9 @@ const showSubscribePrompt = computed(() => {
 
 // 设置默认 tab 下显示的页面
 onMounted(() => {
+  if (route.path !== '/info') {
+    return
+  }
   if (defaultTab() == 'team') {
     if (userData['team_id'] < 0) {
       router.push('/info/team/notjoin')
@@ -59,18 +66,6 @@ function changeTab(value: string) {
     } else {
       router.push(messagesRoute)
     }
-  }
-}
-
-function refresh() {
-  if (localStorage.getItem('canLoadInfo') == null || localStorage.getItem('canLoadInfo') == 'yes') {
-    localStorage.setItem('canLoadInfo', 'no')
-    router.push('/loading')
-    setTimeout(() => {
-      localStorage.setItem('canLoadInfo', 'yes')
-    }, 1000)
-  } else {
-    message.warning('让生产队的驴休息一下吧')
   }
 }
 
@@ -191,7 +186,7 @@ function showModalClick() {
       <n-button @click=" showModalClick " round>
         <div style="margin-left: 5px">公告 🔥</div>
       </n-button>
-      <n-button @click='refresh' round >
+      <n-button @click='() => refresh()' round >
         <div style="margin-left: 5px">刷新 🔄</div>
       </n-button>
       </div>

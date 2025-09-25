@@ -1,5 +1,12 @@
+import exp from 'constants'
 import Server from './config/server'
 import axios from 'axios'
+
+import { useRouter } from 'vue-router'
+
+import { useMessage } from 'naive-ui'
+import path from 'path'
+
 
 export function getQueryVariable(variable: string): string {
   let query = window.location.search.substring(1)
@@ -113,5 +120,27 @@ export function parseCampus(campusNumber: number): string {
     return '莫干山校区'
   } else {
     return ''
+  }
+}
+
+
+export const useRefresh = () => {
+  const router = useRouter();
+  const message = useMessage(); 
+  return function refresh(from?: string) { //是否回到当前页面
+    if (localStorage.getItem('canLoadInfo') == null || localStorage.getItem('canLoadInfo') == 'yes') {
+      localStorage.setItem('canLoadInfo', 'no')
+      router.push({
+        path: "/loading",
+        query: {
+          from: from
+        }
+      })
+      setTimeout(() => {
+        localStorage.setItem('canLoadInfo', 'yes')
+      }, 1000)
+    } else {
+      message.warning('让生产队的驴休息一下吧')
+    }
   }
 }
