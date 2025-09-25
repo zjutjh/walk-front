@@ -44,7 +44,7 @@ const onSubmitAdd = async (): Promise<void> => {
     }
     )
     if(addResult.data.code === 200) { 
-      message.success(addResult.data.msg)
+      message.success("添加成员成功")
       refresh("/info/team/managemember")
     }else{
       message.error(addResult.data.msg)
