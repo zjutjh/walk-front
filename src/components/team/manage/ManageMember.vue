@@ -75,7 +75,12 @@ const onSubmitAdd = async (): Promise<void> => {
         :bordered="false"
       >
         <div style="font-size: 16px;">请输入要添加的队员学号</div>
-        <n-input  style="margin-top: 8px;" placeholder="学号" v-model:value="memberId"/>
+        <n-input
+          style="margin-top: 8px;"
+          placeholder="学号"
+          v-model:value="memberId"
+          @keyup.enter="onSubmitAdd"
+        />
       </n-card>
     </n-modal>
   </n-message-provider>
