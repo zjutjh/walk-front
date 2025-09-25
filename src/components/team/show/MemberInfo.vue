@@ -50,7 +50,7 @@ const teamName = computed(() => {
         size="small"
         type="success"
       >{{ teamName }}</n-tag>
-      <n-button v-if="isLeader && !teamData['submitted']" @click="jumpToManageMember" size="small" round
+      <n-button v-if="isLeader" @click="jumpToManageMember" size="small" round
         >管理团队</n-button>
     </template>
     <!-- 领队信息 -->

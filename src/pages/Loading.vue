@@ -2,13 +2,14 @@
 import { NSpace, NSpin, useDialog } from 'naive-ui'
 import Server from '../config/server'
 import axios from 'axios'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 import { onMounted } from 'vue'
 import { storeUserInfo, storeTeamInfo, storeUserMesage } from '../utility'
 
 // 变量定义
 const dialog = useDialog()
 const router = useRouter()
+const route = useRoute()
 
 onMounted(() => {
   const jwt = localStorage.getItem('jwt')
@@ -40,7 +41,13 @@ onMounted(() => {
         storeUserInfo(userApiRespData)
         await storeTeamInfo(userApiRespData, jwt)
         await storeUserMesage(jwt)
-        router.replace('/info')
+        console.log(route.query.from)
+        if(route.query.from !== undefined){
+          console.log("back")
+          router.replace(route.query.from as string)
+        }else {
+          router.replace('/info')
+        }
       } else if (userApiRespData['msg'] == 'time error') {
         dialog.warning({
           closable: false,

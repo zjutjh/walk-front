@@ -3,9 +3,12 @@ import { NSpace, NButton, NCard, useMessage } from 'naive-ui'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 import Server from '../../../config/server'
+import { useRefresh } from '../../../utility'
 
 const message = useMessage()
 const router = useRouter()
+const refresh = useRefresh()
+
 defineProps({
   name: String,
   isLeader: Boolean,
@@ -13,10 +16,16 @@ defineProps({
   openId: String,
 })
 
+interface RemoveResponse{
+  code: number;
+  data: null;
+  msg: string
+}
+
 function removeMember(openID: string | undefined) {
   const removeMemberUrl = Server.urlPrefix + Server.apiMap['team']['remove']
   axios
-    .get(removeMemberUrl, {
+    .get<RemoveResponse>(removeMemberUrl, {
       params: {
         openid: openID,
       },
@@ -25,9 +34,13 @@ function removeMember(openID: string | undefined) {
         Authorization: 'Bearer ' + localStorage.getItem('jwt'),
       },
     })
-    .then(function (_) {
-      message.success('删除队员成功')
-      setTimeout(() => router.push('/loading'), 1000)
+    .then(function (result) {
+      if(result.data.code === 200) {
+        message.success('删除队员成功')
+        refresh("/info/team/managemember")
+      }else{
+        message.error(result.data.msg)
+      }
     })
     .catch(function (_) {
       message.error('网络错误，请检查网络')
