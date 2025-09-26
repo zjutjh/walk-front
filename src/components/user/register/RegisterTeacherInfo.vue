@@ -18,10 +18,9 @@ const formRef = ref();
 const message = useMessage();
 const router = useRouter();
 const formValue = ref({
-  name: '',
-  gender: -1,
   home: '身份证号',
   stu_id: '',
+  password: '',
   id: '',
   contact: {
     tel: '',
@@ -41,6 +40,11 @@ const rules = ref({
     trigger: ['input', 'blur'],
   },
   stu_id: {
+    required: true,
+    message: '请输入工号',
+    trigger: ['input', 'blur'],
+  },
+  password: {
     required: true,
     message: '请输入工号',
     trigger: ['input', 'blur'],
@@ -114,7 +118,6 @@ function submit() {
   formRef.value.validate((errors: any) => {
     if (!errors) {
       // 提交数据
-      formValue.value.gender = Number(formValue.value.gender);
       const submitTeacherUrl =
         Server.urlPrefix + Server.apiMap['register']['teacher'];
       axios
@@ -147,15 +150,18 @@ function submit() {
     ref="formRef"
     style="margin: 10px auto 0"
   >
-    <n-form-item label="姓名" path="name">
-      <n-input placeholder="请输入姓名" v-model:value="formValue.name" />
+    <n-form-item label="工号" path="stu_id">
+      <n-input
+        placeholder="请输入工号"
+        v-model:value="formValue.stu_id"
+      />
     </n-form-item>
-
-    <n-form-item label="性别" path="gender">
-      <n-radio-group v-model:value="formValue.gender">
-        <n-radio-button value="1">男</n-radio-button>
-        <n-radio-button value="2">女</n-radio-button>
-      </n-radio-group>
+    <n-form-item label="统一密码" path="password">
+      <n-input
+        type="password"
+        placeholder="请输入密码"
+        v-model:value="formValue.password"
+      />
     </n-form-item>
     <n-form-item label="故乡" path="home">
       <n-radio-group v-model:value="formValue.home">
@@ -169,12 +175,6 @@ function submit() {
       <n-input
         :placeholder="'请输入' + formValue.home"
         v-model:value="formValue.id"
-      />
-    </n-form-item>
-    <n-form-item label="工号" path="stu_id">
-      <n-input
-        placeholder="请输入工号"
-        v-model:value="formValue.stu_id"
       />
     </n-form-item>
     <n-form-item label="电话号码" path="contact.tel">
