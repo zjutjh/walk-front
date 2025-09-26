@@ -114,7 +114,7 @@ function submit() {
     style="margin: 10px auto 0"
   >
     <n-form-item style='margin-top: -30px'>
-      <n-text style='color: gray'>以报名时所提交信息为准，可能由于报名时信息填写有误导致无法登录，如有问题联系吴同学，微信号：hrw654789</n-text>
+      <n-text style='color: gray'>以报名时所提交信息为准，可能由于报名时信息填写有误导致无法登录，如有问题联系彭同学，微信号：phlin996</n-text>
     </n-form-item>
     <n-form-item label="姓名" path="name">
       <n-input placeholder="请输入姓名" v-model:value="formValue.name" />
