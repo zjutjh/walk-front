@@ -29,16 +29,6 @@ const formValue = ref({
   },
 });
 const rules = ref({
-  name: {
-    required: true,
-    message: '请输入姓名',
-    trigger: 'blur',
-  },
-  gender: {
-    required: true,
-    message: '请选择性别',
-    trigger: ['input', 'blur'],
-  },
   stu_id: {
     required: true,
     message: '请输入工号',
