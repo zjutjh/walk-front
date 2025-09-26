@@ -79,10 +79,6 @@ collegeOptions.value = [
     value: '经济学院',
   },
   {
-    label: '理学院',
-    value: '理学院',
-  },
-  {
     label: '人文学院',
     value: '人文学院',
   },
@@ -117,6 +113,14 @@ collegeOptions.value = [
   {
     label: '国际学院',
     value: '国际学院',
+  },
+  {
+    label: '能源与碳中和科教融合学院',
+    value: '能源与碳中和科教融合学院',
+  },
+  {
+    label: '数学科学学院',
+    value: '数学科学学院',
   }
 ];
 const formValue = ref({
