@@ -8,10 +8,10 @@ import RandomList from './RandomList.vue'
 
 const router = useRouter()
 const message = useMessage()
-const route = ref(1)
+const route = ref(2)
 const showModal = ref(false)
 const routeOptions = ref([
-  { label: '朝晖全程', value: 1 },
+  // { label: '朝晖全程', value: 1 },
   { label: '屏峰半程', value: 2 },
   { label: '屏峰全程', value: 3 },
   // { label: '莫干山半程', value: 4 },
