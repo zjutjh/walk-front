@@ -106,11 +106,8 @@ collegeOptions.value = [
 ]
 
 const formValue = ref({
-  name: userData['name'],
-  gender: userData['gender'],
   college: userData['college'],
   campus: userData['campus'],
-  stu_id: userData['stu_id'],
   home: '身份证号',
   id: '',
   contact: {
@@ -121,27 +118,6 @@ const formValue = ref({
 })
 
 const rules = ref({
-  name: {
-    required: true,
-    message: '请输入姓名',
-    trigger: 'blur',
-  },
-  gender: {
-    required: true,
-    message: '请选择性别',
-  },
-  stu_id: {
-    required: true,
-    validator(rule: any, value: any) {
-      if (!value) {
-        return new Error('请输入学号')
-      } else if (!/^[0-9a-zA-Z_]{1,}$/.test(value)) {
-        return new Error('学号格式不正确')
-      }
-      return true
-    },
-    trigger: ['input', 'blur'],
-  },
   college: {
     required: true,
     message: '请选择学院',
@@ -253,16 +229,6 @@ function submit() {
 
 <template>
   <n-form :model="formValue" :rules="rules" ref="formRef" style="margin: 10px auto 0">
-    <n-form-item label="姓名" path="name">
-      <n-input placeholder="请输入姓名" v-model:value="formValue.name" />
-    </n-form-item>
-
-    <n-form-item label="性别" path="gender">
-      <n-radio-group v-model:value="formValue.gender">
-        <n-radio-button :value="1">男</n-radio-button>
-        <n-radio-button :value="2">女</n-radio-button>
-      </n-radio-group>
-    </n-form-item>
 
     <n-form-item label="学院" path="college">
       <n-select
@@ -280,9 +246,6 @@ function submit() {
       </n-radio-group>
     </n-form-item>
 
-    <n-form-item label="学号" path="stu_id">
-      <n-input placeholder="请输入学号" v-model:value="formValue.stu_id" />
-    </n-form-item>
 
     <n-form-item label="家乡" path="home">
       <n-radio-group v-model:value="formValue.home">
