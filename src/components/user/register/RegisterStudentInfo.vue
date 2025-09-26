@@ -120,8 +120,6 @@ collegeOptions.value = [
   }
 ];
 const formValue = ref({
-  name: '',
-  gender: -1,
   college: null,
   campus: -1,
   stu_id: '',
@@ -135,18 +133,6 @@ const formValue = ref({
   },
 });
 const rules = ref({
-  name: {
-    required: true,
-    message: '请输入姓名',
-    trigger: 'blur',
-  },
-  gender: {
-    type: "number",
-    required: true,
-    message: '请选择性别',
-    trigger: ['input', 'blur'],
-
-  },
   stu_id: {
     required: true,
     validator(rule: any, value: any) {
@@ -172,7 +158,7 @@ const rules = ref({
   },
   home: {
     required: true,
-    message: '请选择故乡',
+    message: '请选择家乡',
     trigger: ['input', 'blur'],
   },
   id: {
@@ -246,7 +232,6 @@ function submit() {
     if (!errors) {
       // 提交数据
       formValue.value.campus = Number(formValue.value.campus);
-      formValue.value.gender = Number(formValue.value.gender);
       const submitStudentUrl =
         Server.urlPrefix + Server.apiMap['register']['student'];
       axios
@@ -288,16 +273,14 @@ watch(
     ref="formRef"
     style="margin: 10px auto 0"
   >
-    <n-form-item label="姓名" path="name">
-      <n-input placeholder="请输入姓名" v-model:value="formValue.name" />
+    <n-form-item label="学号" path="stu_id">
+      <n-input placeholder="请输入学号" v-model:value="formValue.stu_id" />
     </n-form-item>
 
-    <n-form-item label="性别" path="gender">
-      <n-radio-group v-model:value="formValue.gender">
-        <n-radio-button :value="1">男</n-radio-button>
-        <n-radio-button :value="2">女</n-radio-button>
-      </n-radio-group>
+    <n-form-item label="统一密码" path="password">
+      <n-input type="password" placeholder="请输入统一登陆密码" v-model:value="formValue.password" />
     </n-form-item>
+
 
     <n-form-item label="学院" path="college">
       <n-select
@@ -315,16 +298,8 @@ watch(
       </n-radio-group>
     </n-form-item>
 
-    <n-form-item label="学号" path="stu_id">
-      <n-input placeholder="请输入学号" v-model:value="formValue.stu_id" />
-    </n-form-item>
 
-    <n-form-item label="统一密码" path="password">
-      <n-input type="password" placeholder="请输入统一登陆密码" v-model:value="formValue.password" />
-    </n-form-item>
-
-
-    <n-form-item label="故乡" path="home"> 
+    <n-form-item label="家乡" path="home"> 
       <n-radio-group v-model:value="formValue.home">
         <n-radio-button value="身份证号">内陆</n-radio-button>
         <n-radio-button value="港澳身份证">港澳</n-radio-button>

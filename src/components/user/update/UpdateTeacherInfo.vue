@@ -12,10 +12,7 @@ const router = useRouter()
 const userData = getUserData()
 
 const formValue = ref({
-  name: userData['name'],
-  gender: userData['gender'],
   campus: userData['campus'],
-  stu_id: userData['stu_id'],
   home: '身份证号',
   id: '',
   contact: {
@@ -26,20 +23,6 @@ const formValue = ref({
 })
 
 const rules = ref({
-  name: {
-    required: true,
-    message: '请输入姓名',
-    trigger: 'blur',
-  },
-  gender: {
-    required: true,
-    message: '请选择性别',
-  },
-  stu_id: {
-    required: true,
-    message: '请输入学号',
-    trigger: ['input', 'blur'],
-  },
   campus: {
     required: true,
     message: '请选择校区',
@@ -47,7 +30,7 @@ const rules = ref({
   },
   home: {
     required: true,
-    message: '请选择故乡',
+    message: '请选择家乡',
     trigger: ['input', 'blur'],
   },
   id: {
@@ -120,7 +103,6 @@ function submit() {
     if (!errors) {
       // 提交数据
       formValue.value.campus = Number(formValue.value.campus)
-      formValue.value.gender = Number(formValue.value.gender)
       const submitStudentUrl = Server.urlPrefix + Server.apiMap['user']['update']
       axios
         .post(submitStudentUrl, formValue.value, {
@@ -147,17 +129,7 @@ function submit() {
 
 <template>
   <n-form :model="formValue" :rules="rules" ref="formRef" style="margin: 10px auto 0">
-    <n-form-item label="姓名" path="name">
-      <n-input placeholder="请输入姓名" v-model:value="formValue.name" />
-    </n-form-item>
-
-    <n-form-item label="性别" path="gender">
-      <n-radio-group v-model:value="formValue.gender">
-        <n-radio-button :value="1">男</n-radio-button>
-        <n-radio-button :value="2">女</n-radio-button>
-      </n-radio-group>
-    </n-form-item>
-    <n-form-item label="故乡" path="home">
+    <n-form-item label="家乡" path="home">
       <n-radio-group v-model:value="formValue.home">
         <n-radio-button value="身份证号">内陆</n-radio-button>
         <n-radio-button value="港澳身份证">港澳</n-radio-button>
