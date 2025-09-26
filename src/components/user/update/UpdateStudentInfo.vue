@@ -153,7 +153,7 @@ const rules = ref({
   },
   home: {
     required: true,
-    message: '请选择故乡',
+    message: '请选择家乡',
     trigger: ['input', 'blur'],
   },
   id: {
@@ -284,7 +284,7 @@ function submit() {
       <n-input placeholder="请输入学号" v-model:value="formValue.stu_id" />
     </n-form-item>
 
-    <n-form-item label="故乡" path="home">
+    <n-form-item label="家乡" path="home">
       <n-radio-group v-model:value="formValue.home">
         <n-radio-button value="身份证号">内陆</n-radio-button>
         <n-radio-button value="港澳身份证">港澳</n-radio-button>
