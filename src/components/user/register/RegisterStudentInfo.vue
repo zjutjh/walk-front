@@ -23,60 +23,84 @@ const router = useRouter();
 let collegeOptions = ref<SelectMixedOption[]>();
 collegeOptions.value = [
   {
-    label: '材料科学与工程学院',
-    value: '材料科学与工程学院',
+    label: '健行学院',
+    value: '健行学院',
   },
   {
-    label: '地理信息学院',
-    value: '地理信息学院',
-  },
-  {
-    label: '法学院',
-    value: '法学院',
-  },
-  {
-    label: '公共管理学院',
-    value: '公共管理学院',
-  },
-  {
-    label: '马克思主义学院',
-    value: '马克思主义学院',
-  },
-  {
-    label: '管理学院',
-    value: '管理学院',
+    label: '健行学院预科班',
+    value: '健行学院预科班',
   },
   {
     label: '化学工程学院',
     value: '化学工程学院',
   },
   {
+    label: '生物工程学院',
+    value: '生物工程学院',
+  },
+  {
+    label: '药学院、绿色制药协同创新中心',
+    value: '药学院、绿色制药协同创新中心',
+  },
+  {
     label: '环境学院',
     value: '环境学院',
   },
   {
-    label: '物理学院',
-    value: '物理学院',
+    label: '材料科学与工程学院',
+    value: '材料科学与工程学院',
+  },
+  {
+    label: '食品科学与工程学院',
+    value: '食品科学与工程学院',
   },
   {
     label: '机械工程学院',
     value: '机械工程学院',
   },
   {
-    label: '计算机科学与技术学院',
-    value: '计算机科学与技术学院',
+    label: '信息工程学院',
+    value: '信息工程学院',
   },
   {
-    label: '健行学院',
-    value: '健行学院',
+    label: '计算机科学与技术学院、软件学院',
+    value: '计算机科学与技术学院、软件学院',
   },
   {
-    label: '教育学院',
-    value: '教育学院',
+    label: '土木工程学院',
+    value: '土木工程学院',
+  },
+  {
+    label: '能源与碳中和科教融合学院',
+    value: '能源与碳中和科教融合学院',
+  },
+  {
+    label: '地理信息学院',
+    value: '地理信息学院',
+  },
+  {
+    label: '物理学院',
+    value: '物理学院',
+  },
+  {
+    label: '数学科学学院',
+    value: '数学科学学院',
+  },
+  {
+    label: '管理学院',
+    value: '管理学院',
   },
   {
     label: '经济学院',
     value: '经济学院',
+  },
+  {
+    label: '教育学院(职业技术教育学院)',
+    value: '教育学院(职业技术教育学院)',
+  },
+  {
+    label: '外国语学院',
+    value: '外国语学院',
   },
   {
     label: '人文学院',
@@ -87,40 +111,20 @@ collegeOptions.value = [
     value: '设计与建筑学院',
   },
   {
-    label: '生物工程学院',
-    value: '生物工程学院',
+    label: '法学院',
+    value: '法学院',
   },
   {
-    label: '食品科学与工程学院',
-    value: '食品科学与工程学院',
-  },
-  {
-    label: '土木工程学院',
-    value: '土木工程学院',
-  },
-  {
-    label: '外国语学院',
-    value: '外国语学院',
-  },
-  {
-    label: '信息工程学院',
-    value: '信息工程学院',
-  },
-  {
-    label: '药学院、绿色制药协同创新中心',
-    value: '药学院、绿色制药协同创新中心',
+    label: '公共管理学院',
+    value: '公共管理学院',
   },
   {
     label: '国际学院',
     value: '国际学院',
   },
   {
-    label: '能源与碳中和科教融合学院',
-    value: '能源与碳中和科教融合学院',
-  },
-  {
-    label: '数学科学学院',
-    value: '数学科学学院',
+    label: '马克思主义学院',
+    value: '马克思主义学院',
   }
 ];
 const formValue = ref({

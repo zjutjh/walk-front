@@ -20,8 +20,8 @@ collegeOptions.value = [
     value: '健行学院',
   },
   {
-    label: '健行书院预科班',
-    value: '健行书院预科班',
+    label: '健行学院预科班',
+    value: '健行学院预科班',
   },
   {
     label: '化学工程学院',
@@ -56,12 +56,28 @@ collegeOptions.value = [
     value: '信息工程学院',
   },
   {
-    label: '计算机科学与技术学院',
-    value: '计算机科学与技术学院',
+    label: '计算机科学与技术学院、软件学院',
+    value: '计算机科学与技术学院、软件学院',
   },
   {
     label: '土木工程学院',
     value: '土木工程学院',
+  },
+  {
+    label: '能源与碳中和科教融合学院',
+    value: '能源与碳中和科教融合学院',
+  },
+  {
+    label: '地理信息学院',
+    value: '地理信息学院',
+  },
+  {
+    label: '物理学院',
+    value: '物理学院',
+  },
+  {
+    label: '数学科学学院',
+    value: '数学科学学院',
   },
   {
     label: '管理学院',
@@ -72,8 +88,8 @@ collegeOptions.value = [
     value: '经济学院',
   },
   {
-    label: '教育科学与技术学院',
-    value: '教育科学与技术学院',
+    label: '教育学院(职业技术教育学院)',
+    value: '教育学院(职业技术教育学院)',
   },
   {
     label: '外国语学院',
@@ -92,20 +108,16 @@ collegeOptions.value = [
     value: '法学院',
   },
   {
-    label: '马克思主义学院、公共管理学院',
-    value: '马克思主义学院、公共管理学院',
+    label: '公共管理学院',
+    value: '公共管理学院',
   },
   {
     label: '国际学院',
     value: '国际学院',
   },
   {
-    label: '能源与碳中和科教融合学院',
-    value: '能源与碳中和科教融合学院',
-  },
-  {
-    label: '数学科学学院',
-    value: '数学科学学院',
+    label: '马克思主义学院',
+    value: '马克思主义学院',
   }
 ]
 
