@@ -2,7 +2,7 @@
 import { NSpace, NSpin } from 'naive-ui'
 import { useRouter } from 'vue-router'
 import Server from '../config/server'
-import { onMounted } from '@vue/runtime-core'
+import { onMounted } from 'vue'
 import { getQueryVariable } from '../utility'
 
 // 变量定义

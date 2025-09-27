@@ -1,8 +1,7 @@
 <script setup lang='ts'>
 import QrcodeVue from 'qrcode.vue'
 import { NCard } from 'naive-ui'
-import { ref } from 'vue'
-import { onMounted } from '@vue/runtime-core'
+import { ref,onMounted } from 'vue'
 import { getUserData } from '../utility'
 
 const props = defineProps(['method'])

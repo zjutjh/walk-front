@@ -4,3 +4,4 @@ dist*
 dist-ssr
 *.local
 src/config/server.ts
+uploadToQiniu.js
