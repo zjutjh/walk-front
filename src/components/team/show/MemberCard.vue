@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
+import { computed } from 'vue';
 import { NTable, NTag, NSpace, NCard, NButton, useMessage, useDialog } from 'naive-ui'
 import Config from '../../../config/server'
 import axios, { AxiosResponse } from 'axios'
