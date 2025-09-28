@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import VConsole from 'vconsole'
 import { routes } from './routes'
+import { disableWeChatShare, isWeChatBrowser } from './utility'
 
 // 设置前端路由
 const router = createRouter({
@@ -15,6 +16,19 @@ const router = createRouter({
 const app = createApp(App)
 app.use(router)
 app.mount('#app')
+
+const enforceWeChatMenuPolicy = () => {
+  if (isWeChatBrowser()) {
+    disableWeChatShare()
+  }
+}
+
+router.isReady().then(() => {
+  enforceWeChatMenuPolicy()
+  router.afterEach(() => {
+    enforceWeChatMenuPolicy()
+  })
+})
 
 if (import.meta.env.DEV) {
   setTimeout(() => {
