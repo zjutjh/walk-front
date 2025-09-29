@@ -12,6 +12,7 @@ export default {
     register: {
       student: '/register/student',
       teacher: '/register/teacher',
+      alumni: '/register/alumnus'
     },
     team: {
       create: '/team/create',
@@ -24,8 +25,9 @@ export default {
       randomJoin: '/team/random-join',
       leave: '/team/leave',
       randomList: '/team/random-list',
-      transferCaptain: "/team/transfer-captain",
-      rollback: "/team/rollback"
+      transferCaptain: "/team/captain",
+      rollback: "/team/rollback",
+      add: "/team/add"
     },
     message: {
       list: '/message/list',
