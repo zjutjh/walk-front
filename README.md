@@ -12,18 +12,20 @@
 
 ## 快速开始
 
-1. 配置`/src/config/server.ts`
-2. 安装依赖`pnpm i`
-3. 让后端小伙伴设置 `frontend` 中的 `url` 为本机地址
-4. `pnpm run dev` 电脑微信打开 `localhost:PORT`, 复制url到电脑微信打开
-5. Coding
+1. 复制`server.ts` (cp server.example.ts server.ts)
+2. 配置`/src/config/server.ts`
+3. 安装依赖`pnpm i`
+4. 让后端小伙伴设置 `frontend` 中的 `url` 为本机地址
+5. 向后端小伙伴要一个JWT
+6. `pnpm run dev` 浏览器打开`localhost:PORT/login` 在localstorage里的jwt字段塞入要到的token 
+7. 回到`localhost:PORT/`
+8. Coding
 
-> 如果硬要普通浏览器打开，需要复制账号的 token，写到 localStorage 的 jwt 字段下
 
 ## 打包部署
 
 
-> `pnpm run build` 后将在根目录生成的dist文件压缩成压缩包发给后端小伙伴 
+> `pnpm run build`
 
 
 ## 更多资料
