@@ -1,10 +1,11 @@
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue()],
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd());
+  return {plugins: [vue()],
   build: {
     rollupOptions: {
       input: {
@@ -13,8 +14,11 @@ export default defineConfig({
     }
   },
   server: {
-    proxy: {
-      "/api": "https://demo.patrickstar.net.cn"
-    }
-  }
+      proxy: {
+        "/api": {
+          target: env.VITE_HOST,
+          changeOrigin: true
+        }
+      }
+  }}
 })

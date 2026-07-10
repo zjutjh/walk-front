@@ -1,5 +1,5 @@
 export default {
-  urlPrefix: '',
+  urlPrefix: import.meta.env.VITE_URL_PREFIX,
   apiMap: {
     basic: {
       oauth: '/oauth',
