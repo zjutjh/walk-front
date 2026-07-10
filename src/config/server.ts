@@ -6,8 +6,8 @@ export default {
       login: '/login',
     },
     user: {
-      info: '/user/info',
-      update: '/user/modify',
+      info: '/info',
+      update: '/modify',
     },
     register: {
       student: '/register/student',
