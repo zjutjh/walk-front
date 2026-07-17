@@ -1,13 +1,13 @@
 export default {
-  urlPrefix: '',
+  urlPrefix: import.meta.env.VITE_URL_PREFIX,
   apiMap: {
     basic: {
       oauth: '/oauth',
       login: '/login',
     },
     user: {
-      info: '/user/info',
-      update: '/user/modify',
+      info: '/info',
+      update: '/modify',
     },
     register: {
       student: '/register/student',
