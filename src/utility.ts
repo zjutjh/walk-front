@@ -1,11 +1,10 @@
-import exp from 'constants'
 import Server from './config/server'
 import axios from 'axios'
+import { campusText } from './config/walk'
 
 import { useRouter } from 'vue-router'
 
 import { useMessage } from 'naive-ui'
-import path from 'path'
 
 
 export function getQueryVariable(variable: string): string {
@@ -64,7 +63,7 @@ export function isValidKey(key: string | number | symbol, object: object): key i
 // 判断是否是老师
 export function isTeacher(): boolean {
   const userData = getUserData()
-  return userData['campus'] === 5
+  return userData['type'] === 'teacher'
 }
 
 // 查询 info 页面应该显示哪个 tab
@@ -111,16 +110,8 @@ export function parseGender(genderNumber: number): string {
   return genderNumber == 1 ? '男' : '女'
 }
 
-export function parseCampus(campusNumber: number): string {
-  if (campusNumber == 1) {
-    return '朝晖校区'
-  } else if (campusNumber == 2) {
-    return '屏峰校区'
-  } else if (campusNumber == 3) {
-    return '莫干山校区'
-  } else {
-    return ''
-  }
+export function parseCampus(campus: string): string {
+  return campusText(campus)
 }
 
 

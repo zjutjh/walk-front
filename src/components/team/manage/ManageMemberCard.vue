@@ -13,7 +13,7 @@ defineProps({
   name: String,
   isLeader: Boolean,
   tel: String,
-  openId: String,
+  userId: Number,
 })
 
 interface RemoveResponse{
@@ -22,12 +22,12 @@ interface RemoveResponse{
   msg: string
 }
 
-function removeMember(openID: string | undefined) {
+function removeMember(userId: number | undefined) {
   const removeMemberUrl = Server.urlPrefix + Server.apiMap['team']['remove']
   axios
     .get<RemoveResponse>(removeMemberUrl, {
       params: {
-        openid: openID,
+        id: userId,
       },
       timeout: 3000,
       headers: {
@@ -58,7 +58,7 @@ function removeMember(openID: string | undefined) {
     size="small"
   >
     <template #header-extra>
-      <n-button @click="removeMember(openId)" :type="'error'" size="small">删除</n-button>
+      <n-button @click="removeMember(userId)" :type="'error'" size="small">删除</n-button>
     </template>
     <n-space justify="space-between">
       <div>电话</div>

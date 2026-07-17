@@ -4,6 +4,7 @@ import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import MemberCard from './MemberCard.vue'
 import { getTeamData, getUserData } from '../../../utility'
+import { isCaptain } from '../../../config/walk'
 
 const router = useRouter()
 
@@ -14,7 +15,7 @@ console.log(teamData)
 // 是否是队长
 const isLeader = computed(() => {
   const userData = getUserData()
-  return userData['status'] == '2' ? true : false
+  return isCaptain(userData['role'])
 })
 
 function jumpToManageMember() {
@@ -23,18 +24,15 @@ function jumpToManageMember() {
 
 
 const isAllTeacher = computed(() => {
-  for(const member in teamData['member']) {
-    if(member['type'] != 2) return false
-  }
-  return true
+  return teamData.value['member'].every((member: any) => member['type'] === 'teacher')
 })
 
 const teamName = computed(() => {
-  if(teamData.value['leader']['type'] === 3){
+  if(teamData.value['leader']['type'] === 'alumnus' || teamData.value['leader']['type'] === 'alumni'){
     return "校友队"
-  } else if (teamData.value['leader']['type'] === 1) {
+  } else if (teamData.value['leader']['type'] === 'student') {
     return "学生队"
-  } else if (teamData.value['leader']['type'] === 2 && isAllTeacher.value) {
+  } else if (teamData.value['leader']['type'] === 'teacher' && isAllTeacher.value) {
     return "老师队"
   } else {
     return "师生队"
@@ -77,7 +75,7 @@ const teamName = computed(() => {
       :walk-status="member['walk_status']"
       :is-leader="false"
       :type="member['type']"
-      :openid = "member['open_id']"
+      :user-id="member['id']"
     ></member-card>
   </n-card>
 </template>

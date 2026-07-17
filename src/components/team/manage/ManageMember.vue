@@ -89,7 +89,7 @@ const onSubmitAdd = async (): Promise<void> => {
     v-for="member in teamData['member']"
     :name="member['name']"
     :tel="member['contact']['tel']"
-    :open-id="member['open_id']"
+    :user-id="member['id']"
   ></manage-member-card>
 
   <n-empty

@@ -4,21 +4,21 @@ import { NTable, NTag, NSpace, NCard, NButton, useMessage, useDialog } from 'nai
 import Config from '../../../config/server'
 import axios, { AxiosResponse } from 'axios'
 import { useRouter } from 'vue-router'
+import { campusText, isCaptain, userTypeText, walkStatusText } from '../../../config/walk'
 const message = useMessage()
 const router = useRouter()
 const dialog = useDialog()
 const userData = JSON.parse(<string>localStorage.getItem("user_data"))
-console.log(userData["status"])
 const props = defineProps({
   name: String,
   isLeader: Boolean,
   tel: String,
   qq: String,
-  walkStatus: Number,
-  campus: Number,
+  walkStatus: String,
+  campus: String,
   wechat: String,
-  type: Number,
-  openid: String
+  type: String,
+  userId: Number,
 });
 function refresh() {
   if (localStorage.getItem('canLoadInfo') == null || localStorage.getItem('canLoadInfo') == 'yes') {
@@ -45,7 +45,7 @@ const handleClick = () => {
 }
 const transferCaptain = () => {
   const transferCaptainUrl = Config.urlPrefix + Config.apiMap['team']['transferCaptain']
-  axios.post(transferCaptainUrl, { open_id: props.openid }, {
+  axios.post(transferCaptainUrl, { id: props.userId }, {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('jwt'),
     },
@@ -75,19 +75,14 @@ const wechatStr = computed(() => {
 });
 
 const walkStatus = computed(() => {
-  const walkStatus = props.walkStatus;
-  if(walkStatus === 1) return '未开始'
-  else if(walkStatus === 2) return '进行中'
-  else if(walkStatus === 3) return '扫码成功'
-  else if(walkStatus === 4) return '放弃'
-  else if(walkStatus === 5) return '已完成'
+  return walkStatusText(props.walkStatus ?? '')
 })
 
 const campusName = computed(() => {
-  if (props.campus == 1) return '朝晖';
-  else if (props.campus == 2) return '屏峰';
-  else if (props.campus == 3) return '莫干山';
+  return campusText(props.campus ?? '').replace('校区', '')
 });
+
+const typeName = computed(() => userTypeText(props.type ?? ''))
 </script>
 
 <template>
@@ -100,28 +95,8 @@ const campusName = computed(() => {
   >
     <template #header-extra>
       <n-space>
-        <n-tag
-          v-if="type == 1"
-          style="margin-right: 10px"
-          size="small"
-          type="success"
-        >学生</n-tag
-        >
-        <n-tag
-          v-if="type == 2"
-          style="margin-right: 10px"
-          size="small"
-          type="success"
-          >教职工</n-tag
-        >
-        <n-tag
-          v-if="type == 3"
-          style="margin-right: 10px"
-          size="small"
-          type="success"
-        >校友</n-tag
-        >
-        <n-tag v-if=' campus !== 0 ' style="margin-right: 10px" size="small" type="warning">{{
+        <n-tag style="margin-right: 10px" size="small" type="success">{{ typeName }}</n-tag>
+        <n-tag v-if="campus" style="margin-right: 10px" size="small" type="warning">{{
           campusName
         }}</n-tag>
         <n-tag
@@ -160,7 +135,7 @@ const campusName = computed(() => {
     <n-button
       style="width: 100%; margin: 10px auto auto;"
       type="warning"
-      v-if='!props.isLeader && userData["status"] === 2'
+      v-if="!props.isLeader && isCaptain(userData['role'])"
       @click='handleClick'
     >移交队长</n-button>
   </n-card>

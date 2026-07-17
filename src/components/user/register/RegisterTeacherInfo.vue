@@ -13,15 +13,17 @@ import { ref } from 'vue';
 import Server from '../../../config/server';
 import axios, { AxiosResponse } from 'axios';
 import { useRouter } from 'vue-router';
+import { CAMPUS_OPTIONS } from '../../../config/walk';
 
 const formRef = ref();
 const message = useMessage();
 const router = useRouter();
 const formValue = ref({
+  campus: null as string | null,
   home: '身份证号',
   stu_id: '',
   password: '',
-  id: '',
+  identity: '',
   contact: {
     tel: '',
     wechat: '',
@@ -29,6 +31,11 @@ const formValue = ref({
   },
 });
 const rules = ref({
+  campus: {
+    required: true,
+    message: '请选择校区',
+    trigger: ['input', 'blur'],
+  },
   stu_id: {
     required: true,
     message: '请输入工号',
@@ -44,7 +51,7 @@ const rules = ref({
     message: '请选择家乡',
     trigger: ['input', 'blur'],
   },
-  id: {
+  identity: {
     required: true,
     validator(rule: any, value: any) {
       if (!value) {
@@ -153,6 +160,15 @@ function submit() {
         v-model:value="formValue.password"
       />
     </n-form-item>
+    <n-form-item label="校区" path="campus">
+      <n-radio-group v-model:value="formValue.campus">
+        <n-radio-button
+          v-for="campus in CAMPUS_OPTIONS"
+          :key="campus.value"
+          :value="campus.value"
+        >{{ campus.label }}</n-radio-button>
+      </n-radio-group>
+    </n-form-item>
     <n-form-item label="家乡" path="home">
       <n-radio-group v-model:value="formValue.home">
         <n-radio-button value="身份证号">内陆</n-radio-button>
@@ -161,10 +177,10 @@ function submit() {
         <n-radio-button value="护照">国际</n-radio-button>
       </n-radio-group>
     </n-form-item>
-    <n-form-item :label="formValue.home" path="id">
+    <n-form-item :label="formValue.home" path="identity">
       <n-input
         :placeholder="'请输入' + formValue.home"
-        v-model:value="formValue.id"
+        v-model:value="formValue.identity"
       />
     </n-form-item>
     <n-form-item label="电话号码" path="contact.tel">
