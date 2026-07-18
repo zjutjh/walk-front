@@ -131,7 +131,7 @@ function updateTeamAPI() {
         message.success('更新成功')
         setTimeout(() => router.push('/loading'))
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -187,7 +187,7 @@ function goBack() {
           preset="dialog"
           title="是否允许队员随机加入"
           content="随机队伍可能有更多小哥哥小姐姐，但也有可能来者不善，有密码泄露的风险，为了不打扰您的安宁，请考虑关闭此功能"
-          positive-text="确认"
+          positive-text="保持开启"
           @positive-click="onPositiveClick"
           negative-text="再想想"
           @negative-click="onNegativeClick"

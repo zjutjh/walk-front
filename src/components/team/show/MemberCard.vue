@@ -56,7 +56,7 @@ const transferCaptain = () => {
       message.success('移交成功')
       refresh()
     } else {
-      message.error(respData['msg'])
+      message.error(respData['message'])
     }
   })
     .catch(function (error) {

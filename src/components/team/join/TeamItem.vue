@@ -30,7 +30,7 @@ function randomJoin() {
       message.success('加入成功')
       router.push('/loading')
     } else {
-      message.error(respData['msg'])
+      message.error(respData['message'])
     }
   })()
 }
