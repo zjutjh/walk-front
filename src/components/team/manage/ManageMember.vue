@@ -27,7 +27,7 @@ const memberId = ref("")
 interface AddResponse {
   code: number
   data: null
-  msg: string
+  message: string
 }
 const onSubmitAdd = async (): Promise<void> => {
   const joinTeamUrl = ServerConfig.urlPrefix + ServerConfig.apiMap['team']['add'];
@@ -47,7 +47,7 @@ const onSubmitAdd = async (): Promise<void> => {
       message.success("添加成员成功")
       refresh("/info/team/managemember")
     }else{
-      message.error(addResult.data.msg)
+      message.error(addResult.data.message)
     }
   }catch{
     (error: Error) => {
@@ -89,7 +89,7 @@ const onSubmitAdd = async (): Promise<void> => {
     v-for="member in teamData['member']"
     :name="member['name']"
     :tel="member['contact']['tel']"
-    :open-id="member['open_id']"
+    :user-id="member['id']"
   ></manage-member-card>
 
   <n-empty

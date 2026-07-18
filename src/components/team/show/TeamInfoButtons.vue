@@ -5,6 +5,7 @@ import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ServerConfig from '../../../config/server'
 import { getTeamData, getUserData } from '../../../utility'
+import { isCaptain } from '../../../config/walk'
 
 const router = useRouter()
 const message = useMessage()
@@ -19,7 +20,7 @@ const teamData = ref(getTeamData())
 // 是否是队长
 const isLeader = computed(() => {
   const userData = getUserData()
-  return userData['status'] == '2' ? true : false
+  return isCaptain(userData['role'])
 })
 
 function disbandTeamAPI() {
@@ -37,7 +38,7 @@ function disbandTeamAPI() {
         message.success('解散成功')
         setTimeout(() => router.push('/loading'), 1000)
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -86,7 +87,7 @@ function submitTeam() {
           }
         })
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -109,7 +110,7 @@ function leaveTeam() {
         message.success('退出成功')
         setTimeout(() => router.push('/loading'), 1000)
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -132,7 +133,7 @@ function rollbackTeamAPI() {
         message.success('撤回成功')
         setTimeout(() => router.push('/loading'), 1000)
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -158,7 +159,7 @@ function showPoster() {
 }
 
 const showPosterV = computed(() => {
-  return teamData['status'] === 4;
+  return teamData.value['status'] === 'completed';
 })
 </script>
 

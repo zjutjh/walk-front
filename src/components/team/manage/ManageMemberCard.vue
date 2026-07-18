@@ -13,21 +13,21 @@ defineProps({
   name: String,
   isLeader: Boolean,
   tel: String,
-  openId: String,
+  userId: Number,
 })
 
 interface RemoveResponse{
   code: number;
   data: null;
-  msg: string
+  message: string
 }
 
-function removeMember(openID: string | undefined) {
+function removeMember(userId: number | undefined) {
   const removeMemberUrl = Server.urlPrefix + Server.apiMap['team']['remove']
   axios
     .get<RemoveResponse>(removeMemberUrl, {
       params: {
-        openid: openID,
+        id: userId,
       },
       timeout: 3000,
       headers: {
@@ -39,7 +39,7 @@ function removeMember(openID: string | undefined) {
         message.success('删除队员成功')
         refresh("/info/team/managemember")
       }else{
-        message.error(result.data.msg)
+        message.error(result.data.message)
       }
     })
     .catch(function (_) {
@@ -58,7 +58,7 @@ function removeMember(openID: string | undefined) {
     size="small"
   >
     <template #header-extra>
-      <n-button @click="removeMember(openId)" :type="'error'" size="small">删除</n-button>
+      <n-button @click="removeMember(userId)" :type="'error'" size="small">删除</n-button>
     </template>
     <n-space justify="space-between">
       <div>电话</div>

@@ -33,6 +33,12 @@ type member = {
   name: string
 }
 
+const posterRouteMap: Record<string, number> = {
+  'pf-half': 2,
+  'pf-full': 3,
+  mgs: 5,
+}
+
 
 
 type map = { [n: number]: any};
@@ -64,8 +70,8 @@ onMounted(async () => {
       message.error("请求出错,请稍后重试");
     else {
       const teamData: {
-        status: number
-        route: number
+        status: string
+        route_name: string
         slogan: string
         name: string
         leader: {
@@ -74,14 +80,14 @@ onMounted(async () => {
         member: member[]
       } = res.data.data;
       console.log(teamData);
-      if(teamData.status !== 4){
+      if(teamData.status !== 'completed'){
         message.info("请先完成毅行");
         setTimeout(() => {
           router.push('/info/user/showinfo')
         },1000)
       }
       else {
-        team.value.r = teamData.route;
+        team.value.r = posterRouteMap[teamData.route_name];
         posterB.value = team.value.r
         posterR.value = 5+team.value.r;
         team.value.slogan = teamData.slogan;

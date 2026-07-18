@@ -5,18 +5,13 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ServerConfig from '../../../config/server'
 import RandomList from './RandomList.vue'
+import { ROUTE_OPTIONS } from '../../../config/walk'
 
 const router = useRouter()
 const message = useMessage()
-const route = ref(2)
+const routeName = ref(ROUTE_OPTIONS[0].value)
 const showModal = ref(false)
-const routeOptions = ref([
-  // { label: '朝晖全程', value: 1 },
-  { label: '屏峰半程', value: 2 },
-  { label: '屏峰全程', value: 3 },
-  // { label: '莫干山半程', value: 4 },
-  { label: '莫干山全程', value: 5 },
-])
+const routeOptions = ref(ROUTE_OPTIONS)
 
 let randomTeamList = ref(null)
 let isWaiting = ref(true)
@@ -31,9 +26,9 @@ function goBack() {
   router.push('/info/team/notjoin')
 }
 
-async function getRandomList(routeNumber: number = route.value) {
+async function getRandomList(selectedRouteName: string = routeName.value) {
   const randMatchUrl = ServerConfig.urlPrefix + ServerConfig.apiMap['team']['randomList']
-  const getRandomListData = { route: routeNumber }
+  const getRandomListData = { route_name: selectedRouteName }
   try {
     const response = await axios.post(randMatchUrl, getRandomListData, {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('jwt') },
@@ -80,7 +75,7 @@ onMounted(() => {
   })()
 })
 
-function routeUpdated(value: number) {
+function routeUpdated(value: string) {
   ;(async () => {
     isWaiting.value = true
     randomTeamList.value = await getRandomList(value)
@@ -96,7 +91,7 @@ function routeUpdated(value: number) {
   <n-space style="margin-top: 10px" :vertical="true">
     <n-grid :x-gap="8">
       <n-grid-item :span="18">
-        <n-select v-on:update-value="routeUpdated" v-model:value="route" :options="routeOptions"></n-select>
+        <n-select v-on:update-value="routeUpdated" v-model:value="routeName" :options="routeOptions"></n-select>
       </n-grid-item>
       <n-grid-item>
         <n-button @click="refreshList" :type="'primary'">换一换</n-button>

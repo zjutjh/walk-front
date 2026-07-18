@@ -16,6 +16,7 @@ import { SelectMixedOption } from 'naive-ui/lib/select/src/interface';
 import Server from '../../../config/server';
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import { CAMPUS_OPTIONS } from '../../../config/walk';
 
 const formRef = ref();
 const message = useMessage();
@@ -129,10 +130,10 @@ collegeOptions.value = [
 ];
 const formValue = ref({
   college: null,
-  campus: -1,
+  campus: null as string | null,
   stu_id: '',
   home: '身份证号',
-  id: '',
+  identity: '',
   password: '',
   contact: {
     tel: '',
@@ -159,7 +160,6 @@ const rules = ref({
     trigger: ['input', 'blur'],
   },
   campus: {
-    type: "number",
     required: true,
     message: '请选择校区',
     trigger: ['input', 'blur'],
@@ -169,7 +169,7 @@ const rules = ref({
     message: '请选择家乡',
     trigger: ['input', 'blur'],
   },
-  id: {
+  identity: {
     required: true,
     validator(rule: any, value: any) {
       if (!value) {
@@ -239,7 +239,6 @@ function submit() {
   formRef.value.validate((errors: any) => {
     if (!errors) {
       // 提交数据
-      formValue.value.campus = Number(formValue.value.campus);
       const submitStudentUrl =
         Server.urlPrefix + Server.apiMap['register']['student'];
       axios
@@ -255,7 +254,7 @@ function submit() {
             message.success('注册成功!');
             setTimeout(() => router.push('/loading'), 1000); // 跳转到加载信息页面
           } else {
-            message.error(responseData['msg']); // 报错信息
+            message.error(responseData['message']); // 报错信息
           }
         });
     } else {
@@ -300,9 +299,11 @@ watch(
 
     <n-form-item label="校区" path="campus">
       <n-radio-group v-model:value="formValue.campus">
-        <n-radio-button :value="1">朝晖</n-radio-button>
-        <n-radio-button :value="2">屏峰</n-radio-button>
-        <n-radio-button :value="3">莫干山</n-radio-button>
+        <n-radio-button
+          v-for="campus in CAMPUS_OPTIONS"
+          :key="campus.value"
+          :value="campus.value"
+        >{{ campus.label }}</n-radio-button>
       </n-radio-group>
     </n-form-item>
 
@@ -316,10 +317,10 @@ watch(
       </n-radio-group>
     </n-form-item>
 
-    <n-form-item :label="formValue.home" path="id"  ref="idFormItemRef">
+    <n-form-item :label="formValue.home" path="identity" ref="idFormItemRef">
       <n-input
         :placeholder="'请输入' + formValue.home"
-        v-model:value="formValue.id"
+        v-model:value="formValue.identity"
       />
     </n-form-item>
 

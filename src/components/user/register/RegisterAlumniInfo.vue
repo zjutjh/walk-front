@@ -20,7 +20,7 @@ const router = useRouter();
 const formValue = ref({
   name: '',
   home: '身份证号',
-  id: '',
+  identity: '',
   tel: '',
 });
 const rules = ref({
@@ -29,7 +29,7 @@ const rules = ref({
     message: '请输入姓名',
     trigger: 'blur',
   },
-  id: {
+  identity: {
     required: true,
     validator(rule: any, value: any) {
       if (!value) {
@@ -96,7 +96,8 @@ function submit() {
             message.success('登录成功');
             setTimeout(() => router.push('/loading'), 1000); // 跳转到加载信息页面
           } else {
-            message.error(responseData['msg']); // 报错信息
+            console.log(responseData['message']);
+            message.error(responseData['message']); // 报错信息
           }
         });
     } else {
@@ -120,10 +121,10 @@ function submit() {
       <n-input placeholder="请输入姓名" v-model:value="formValue.name" />
     </n-form-item>
 
-    <n-form-item :label="formValue.home" path="id">
+    <n-form-item :label="formValue.home" path="identity">
       <n-input
         :placeholder="'请输入' + formValue.home"
-        v-model:value="formValue.id"
+        v-model:value="formValue.identity"
       />
     </n-form-item>
     <n-form-item label="电话号码" path="tel">

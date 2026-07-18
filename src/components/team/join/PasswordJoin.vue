@@ -38,7 +38,7 @@ function joinTeam() {
         message.success('加入成功');
         setTimeout(() => router.push('/loading'), 1000);
       } else {
-        message.error(respData['msg']);
+        message.error(respData['message']);
       }
     })
     .catch(function (_) {

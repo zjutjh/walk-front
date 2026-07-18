@@ -6,6 +6,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios, { Axios, AxiosResponse } from 'axios'
 import { getUserData } from '../../../utility'
+import { CAMPUS_OPTIONS } from '../../../config/walk'
 import { NForm, NInput, NFormItem, NButton, NRadioGroup, NRadioButton, useMessage } from 'naive-ui'
 
 const formRef = ref()
@@ -125,7 +126,7 @@ const formValue = ref({
   college: userData['college'],
   campus: userData['campus'],
   home: '身份证号',
-  id: '',
+  identity: '',
   contact: {
     tel: userData['contact']['tel'],
     wechat: userData['contact']['wechat'],
@@ -148,11 +149,10 @@ const rules = ref({
     message: '请选择家乡',
     trigger: ['input', 'blur'],
   },
-  id: {
-    required: true,
+  identity: {
     validator(rule: any, value: any) {
       if (!value) {
-        return new Error('请输入' + formValue.value.home)
+        return true
       } else if (formValue.value.home == '身份证号') {
         if (
           !/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(
@@ -217,10 +217,13 @@ function submit() {
   formRef.value.validate((errors: any) => {
     if (!errors) {
       // 提交数据
-      formValue.value.campus = Number(formValue.value.campus)
+      const { identity, ...otherFields } = formValue.value
+      const submitData = identity.trim()
+        ? { ...otherFields, identity: identity.trim() }
+        : otherFields
       const submitStudentUrl = Server.urlPrefix + Server.apiMap['user']['update']
       axios
-        .post(submitStudentUrl, formValue.value, {
+        .post(submitStudentUrl, submitData, {
           timeout: 3000,
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('jwt'),
@@ -232,7 +235,7 @@ function submit() {
             message.success('修改成功')
             setTimeout(() => router.push('/loading'), 1000) // 跳转到加载信息页面
           } else {
-            message.error(responseData['msg']) // 报错信息
+            message.error(responseData['message']) // 报错信息
           }
         })
     } else {
@@ -255,9 +258,11 @@ function submit() {
 
     <n-form-item label="校区" path="campus">
       <n-radio-group v-model:value="formValue.campus">
-        <n-radio-button :value="1">朝晖</n-radio-button>
-        <n-radio-button :value="2">屏峰</n-radio-button>
-        <n-radio-button :value="3">莫干山</n-radio-button>
+        <n-radio-button
+          v-for="campus in CAMPUS_OPTIONS"
+          :key="campus.value"
+          :value="campus.value"
+        >{{ campus.label }}</n-radio-button>
       </n-radio-group>
     </n-form-item>
 
@@ -271,8 +276,11 @@ function submit() {
       </n-radio-group>
     </n-form-item>
 
-    <n-form-item :label="formValue.home" path="id">
-      <n-input :placeholder="'请输入' + formValue.home" v-model:value="formValue.id" />
+    <n-form-item :label="formValue.home + '（选填）'" path="identity">
+      <n-input
+        :placeholder="'留空则不修改' + formValue.home"
+        v-model:value="formValue.identity"
+      />
     </n-form-item>
 
     <n-form-item label="电话号码" path="contact.tel">

@@ -18,6 +18,7 @@ import { SelectMixedOption } from 'naive-ui/lib/select/src/interface'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getTeamData } from '../../utility'
+import { ROUTE_OPTIONS } from '../../config/walk'
 
 let routeOptions = ref<SelectMixedOption[]>()
 let formRef: any = ref<FormInst | null>(null)
@@ -82,35 +83,14 @@ function onPositiveClick() {
 function onNegativeClick() {
   showModal.value = false
 }
-routeOptions.value = [
-  // {
-  //   label: '朝晖全程',
-  //   value: 1,
-  // },
-  {
-    label: '屏峰半程',
-    value: 2,
-  },
-  {
-    label: '屏峰全程',
-    value: 3,
-  },
-  // {
-  //   label: '莫干山半程',
-  //   value: 4,
-  // },
-  {
-    label: '莫干山全程',
-    value: 5,
-  },
-]
+routeOptions.value = ROUTE_OPTIONS
 
 const teamData: any = getTeamData()
 const formValue = ref({
   name: teamData['name'],
   slogan: teamData['slogan'],
   password: teamData['password'],
-  route: teamData['route'],
+  route_name: teamData['route_name'],
   allow_match: teamData['allow_match'] ? '1' : '0',
 })
 const showModal = ref(false)
@@ -132,7 +112,7 @@ function updateTeamAPI() {
   const postData = {
     name: formValue.value.name,
     slogan: formValue.value.slogan,
-    route: Number(formValue.value.route),
+    route_name: formValue.value.route_name,
     password: formValue.value.password,
     allow_match: formValue.value.allow_match == '1' ? true : false,
   }
@@ -151,7 +131,7 @@ function updateTeamAPI() {
         message.success('更新成功')
         setTimeout(() => router.push('/loading'))
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -184,10 +164,10 @@ function goBack() {
           <n-select v-model:value="formValue.allow_match" :options="allowMatchOptions"></n-select>
         </n-form-item>
 
-        <n-form-item label="路线选择" path="route">
+        <n-form-item label="路线选择" path="route_name">
           <n-select
             disabled
-            v-model:value="formValue.route"
+            v-model:value="formValue.route_name"
             placeholder="请选择路线"
             :options="routeOptions"
           ></n-select>
@@ -207,7 +187,7 @@ function goBack() {
           preset="dialog"
           title="是否允许队员随机加入"
           content="随机队伍可能有更多小哥哥小姐姐，但也有可能来者不善，有密码泄露的风险，为了不打扰您的安宁，请考虑关闭此功能"
-          positive-text="确认"
+          positive-text="保持开启"
           @positive-click="onPositiveClick"
           negative-text="再想想"
           @negative-click="onNegativeClick"

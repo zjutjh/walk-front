@@ -3,6 +3,7 @@ import { NCard, NTable, NButton, useMessage, useDialog, NTag } from 'naive-ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getTeamData, getUserData } from '../../../utility'
+import { isCaptain, pointText, routeText, teamStatusText } from '../../../config/walk'
 
 const teamData = ref(getTeamData())
 const router = useRouter()
@@ -11,7 +12,7 @@ const router = useRouter()
 // 是否是队长
 const isLeader = computed(() => {
   const userData = getUserData()
-  return userData['status'] == '2' ? true : false
+  return isCaptain(userData['role'])
 })
 
 // 是否能允许随机
@@ -31,24 +32,15 @@ const isSubmitted = computed(() => {
 
 // 毅行路线数据
 const teamRoute = computed(() => {
-  if (teamData.value['route'] == 1) return '朝晖全程'
-  else if (teamData.value['route'] == 2) return '屏峰半程'
-  else if (teamData.value['route'] == 3) return '屏峰全程'
-  else if (teamData.value['route'] == 4) return '莫干山半程'
-  else if (teamData.value['route'] == 5) return '莫干山全程'
+  return routeText(teamData.value['route_name'])
 })
 
 const teamStatus = computed(() => {
-  if(teamData.value['status'] === 1) return '未开始'
-  else if(teamData.value['status'] === 2) return '进行中'
-  else if(teamData.value['status'] === 3) return '未完成'
-  else if(teamData.value['status'] === 4) return '完成'
-  else if(teamData.value['status'] === 5) return '扫码成功'
+  return teamStatusText(teamData.value['status'])
 })
 
 const teamPoint = computed(() => {
-  if(teamData.value['point'] === -1) return "未开始"
-  else return teamData.value['point']
+  return pointText(teamData.value['point_name'])
 })
 
 function jumpToUpdateTeam() {
