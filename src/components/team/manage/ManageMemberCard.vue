@@ -19,7 +19,7 @@ defineProps({
 interface RemoveResponse{
   code: number;
   data: null;
-  msg: string
+  message: string
 }
 
 function removeMember(userId: number | undefined) {
@@ -39,7 +39,7 @@ function removeMember(userId: number | undefined) {
         message.success('删除队员成功')
         refresh("/info/team/managemember")
       }else{
-        message.error(result.data.msg)
+        message.error(result.data.message)
       }
     })
     .catch(function (_) {
