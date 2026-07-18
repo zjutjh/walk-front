@@ -254,7 +254,7 @@ function submit() {
             message.success('注册成功!');
             setTimeout(() => router.push('/loading'), 1000); // 跳转到加载信息页面
           } else {
-            message.error(responseData['msg']); // 报错信息
+            message.error(responseData['message']); // 报错信息
           }
         });
     } else {

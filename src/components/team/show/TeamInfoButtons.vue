@@ -38,7 +38,7 @@ function disbandTeamAPI() {
         message.success('解散成功')
         setTimeout(() => router.push('/loading'), 1000)
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -87,7 +87,7 @@ function submitTeam() {
           }
         })
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -110,7 +110,7 @@ function leaveTeam() {
         message.success('退出成功')
         setTimeout(() => router.push('/loading'), 1000)
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
@@ -133,7 +133,7 @@ function rollbackTeamAPI() {
         message.success('撤回成功')
         setTimeout(() => router.push('/loading'), 1000)
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {

@@ -138,7 +138,7 @@ function createTeamAPI() {
         message.success('创建成功')
         setTimeout(() => router.push('/loading'))
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {

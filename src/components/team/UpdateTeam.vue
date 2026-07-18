@@ -131,7 +131,7 @@ function updateTeamAPI() {
         message.success('更新成功')
         setTimeout(() => router.push('/loading'))
       } else {
-        message.error(respData['msg'])
+        message.error(respData['message'])
       }
     })
     .catch(function (error) {
