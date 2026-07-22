@@ -48,14 +48,14 @@ onMounted(() => {
         }else {
           router.replace('/info')
         }
-      } else if (userApiRespData['message'] == 'time error') {
+      } else if (userApiRespData['code'] === 200339) {
         dialog.warning({
           closable: false,
           title: '尚未开始',
           content: '报名尚未开始',
           positiveText: '确定',
         })
-      } else if (userApiRespData['message'] == 'jwt error') {
+      } else if (userApiRespData['code'] === 200201 || userApiRespData['code'] === 200202) {
         // jwt 有问题就重新登录
         const oauthUrl = Server.urlPrefix + Server.apiMap['basic']['oauth']
         localStorage.removeItem('jwt')
